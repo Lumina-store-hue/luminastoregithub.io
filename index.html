@@ -3,276 +3,423 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Catálogo profesional de productos - Descubre nuestra colección premium de pijamas y maquillaje.">
-    <meta name="theme-color" content="#F7C9D9">
-    <meta property="og:title" content="Catálogo de Productos Premium">
-    <meta property="og:description" content="Descubre nuestra colección premium de pijamas y maquillaje.">
+    <title>Lumina — Pijamas Premium</title>
+    <meta name="description" content="Pijamas premium para mujer, hombre, niños y parejas. Envíos a toda Colombia.">
+    <link rel="canonical" href="https://luminapijamas.com/">
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <!-- Open Graph -->
+    <meta property="og:title" content="Lumina — Pijamas Premium">
+    <meta property="og:description" content="Pijamas premium para mujer, hombre, niños y parejas. Envíos a toda Colombia.">
+    <meta property="og:image" content="https://luminapijamas.com/img/og-image.jpg">
+    <meta property="og:url" content="https://luminapijamas.com/">
     <meta property="og:type" content="website">
-    <title>Lumina — Catálogo Premium</title>
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="theme-color" content="#F7C9D9">
+    <!-- Datos estructurados -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Product",
+      "name": "Lumina Pijamas",
+      "description": "Pijamas premium para mujer, hombre, niños y parejas.",
+      "brand": "Lumina",
+      "offers": {
+        "@type": "AggregateOffer",
+        "priceCurrency": "COP",
+        "highPrice": "150000",
+        "lowPrice": "45000",
+        "offerCount": "16"
+      }
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "¿Cómo realizo un pedido?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Haz clic en el botón de WhatsApp en cualquier producto, selecciona talla y color, y el mensaje se enviará automáticamente con todos los detalles."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Qué métodos de pago aceptan?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Aceptamos transferencias bancarias, Nequi, Daviplata y pago contra entrega en algunas zonas."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Hacen envíos a todo el país?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Sí, realizamos envíos a todo Colombia a través de empresas de mensajería confiables."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Puedo devolver un producto?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Aceptamos devoluciones dentro de los 5 días posteriores a la entrega, siempre que el producto no haya sido usado y conserve su empaque original."
+          }
+        }
+      ]
+    }
+    </script>
     <link rel="stylesheet" href="css/styles.css">
-    <link rel="preload" href="img/hero-bg.webp" as="image">
 </head>
-<body class="light-mode">
+<body>
     <!-- Loader -->
-    <div class="loader-wrapper" id="loader" aria-hidden="true">
+    <div class="loader-wrapper" id="loader">
         <div class="loader-ring"></div>
         <span class="loader-text">Lumina</span>
     </div>
 
-    <!-- Header / Navegación -->
-    <header class="header glass" id="header" role="banner">
+    <!-- Barra superior -->
+    <div class="top-bar">
+        <div class="container top-bar__inner">
+            <span>🚚 Envíos a toda Colombia</span>
+            <span>💳 Nequi · Daviplata · Transferencia</span>
+            <span>📞 Atención por <a href="https://wa.me/57XXXXXXXXX" target="_blank">WhatsApp</a></span>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header class="header glass" id="header">
         <div class="container header__inner">
-            <a href="#inicio" class="logo" aria-label="Ir al inicio">LUMINA</a>
-            <nav class="nav" id="nav" role="navigation" aria-label="Menú principal">
-                <button class="nav__toggle" id="navToggle" aria-expanded="false" aria-label="Abrir menú">
-                    <span class="nav__toggle-line"></span>
-                    <span class="nav__toggle-line"></span>
-                    <span class="nav__toggle-line"></span>
+            <a href="#inicio" class="logo">LUMINA</a>
+            <nav class="nav" id="nav">
+                <button class="nav__toggle" id="navToggle" aria-label="Menú">
+                    <span></span><span></span><span></span>
                 </button>
                 <ul class="nav__list" id="navList">
                     <li><a href="#inicio" class="nav__link active" data-section="inicio">Inicio</a></li>
-                    <li><a href="#catalogo" class="nav__link" data-section="catalogo">Catálogo</a></li>
-                    <li><a href="#pijamas" class="nav__link" data-section="pijamas">Pijamas</a></li>
-                    <li><a href="#maquillaje" class="nav__link" data-section="maquillaje">Maquillaje</a></li>
-                    <li><a href="#nuevos" class="nav__link" data-section="nuevos">Nuevos</a></li>
-                    <li><a href="#destacados" class="nav__link" data-section="destacados">Destacados</a></li>
-                    <li><a href="#nosotros" class="nav__link" data-section="nosotros">Nosotros</a></li>
+                    <li><a href="#mujer" class="nav__link" data-section="mujer">Mujer</a></li>
+                    <li><a href="#hombre" class="nav__link" data-section="hombre">Hombre</a></li>
+                    <li><a href="#ninos" class="nav__link" data-section="ninos">Niños</a></li>
+                    <li><a href="#parejas" class="nav__link" data-section="parejas">Parejas</a></li>
+                    <li><a href="#guia-tallas" class="nav__link" data-section="guia-tallas">Guía de Tallas</a></li>
                     <li><a href="#faq" class="nav__link" data-section="faq">FAQ</a></li>
                     <li><a href="#contacto" class="nav__link" data-section="contacto">Contacto</a></li>
                 </ul>
             </nav>
             <div class="header__actions">
-                <button class="btn-icon" id="themeToggle" aria-label="Cambiar modo oscuro">
+                <button class="btn-icon" id="themeToggle" aria-label="Modo oscuro">
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
                 </button>
-                <button class="btn-icon" id="favoritesBtn" aria-label="Ver favoritos">
+                <button class="btn-icon" id="favoritesBtn" aria-label="Favoritos">
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
-                    <span class="badge" id="favCount" aria-hidden="true">0</span>
+                    <span class="badge" id="favCount">0</span>
                 </button>
             </div>
         </div>
     </header>
 
-    <main id="mainContent" role="main">
-        <!-- Sección Inicio / Hero -->
-        <section class="hero" id="inicio" aria-label="Inicio">
-            <div class="hero__bg" aria-hidden="true"></div>
-            <div class="hero__content container">
-                <span class="hero__tag">Nueva Colección 2026</span>
-                <h1 class="hero__title">Descubre la magia<br>de lo sutil</h1>
-                <p class="hero__subtitle">Productos premium que realzan tu belleza natural con la suavidad que mereces.</p>
-                <a href="#catalogo" class="btn btn--primary btn--ripple">Ver Catálogo</a>
-            </div>
-            <div class="hero__scroll" aria-hidden="true">
-                <span>Desliza</span>
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M7 13l5 5 5-5M7 6l5 5 5-5"/></svg>
+    <main>
+        <!-- ===== INICIO ===== -->
+        <section class="section page active" id="page-inicio">
+            <div class="container">
+                <nav class="breadcrumb"><span>Inicio</span></nav>
+                <div class="trust-badges">
+                    <div class="trust-badge">✅ Envío rápido</div>
+                    <div class="trust-badge">🔄 Cambios sin costo</div>
+                    <div class="trust-badge">💬 Atención personalizada</div>
+                    <div class="trust-badge">🏠 Pago contra entrega</div>
+                </div>
+                <div class="section__header">
+                    <span class="section__tag">Bienvenidos</span>
+                    <h2>Pijamas para soñar</h2>
+                    <p>Confort, estilo y calidad para mujer, hombre, niños y parejas.</p>
+                </div>
+                <div class="products-grid" id="inicioGrid"></div>
             </div>
         </section>
 
-        <!-- Sección Catálogo General -->
-        <section class="section" id="catalogo" aria-label="Catálogo completo">
+        <!-- ===== MUJER ===== -->
+        <section class="section page" id="page-mujer">
             <div class="container">
+                <nav class="breadcrumb"><a href="#inicio">Inicio</a> <span class="separator">›</span> <span>Mujer</span></nav>
                 <div class="section__header">
-                    <span class="section__tag">Explora</span>
-                    <h2 class="section__title">Nuestro Catálogo</h2>
-                    <p class="section__subtitle">Cada producto seleccionado con dedicación para ti.</p>
+                    <span class="section__tag">Colección</span>
+                    <h2>Pijamas para Mujer</h2>
+                    <p>Elegancia y suavidad para tus noches.</p>
                 </div>
-                <!-- Buscador y Filtros -->
                 <div class="catalog-tools">
                     <div class="search-box">
                         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
-                        <input type="text" id="searchInput" class="search-box__input" placeholder="Buscar por nombre, categoría, color..." aria-label="Buscar productos">
+                        <input type="text" class="search-input" data-category="mujer" placeholder="Buscar por nombre...">
                     </div>
-                    <div class="filters" id="filters">
-                        <select class="filter-select" id="filterCategory" aria-label="Filtrar por categoría">
-                            <option value="todas">Todas las categorías</option>
-                            <option value="Pijamas">Pijamas</option>
-                            <option value="Maquillaje">Maquillaje</option>
+                    <div class="filters" id="filters-mujer">
+                        <select class="filter-select" data-filter="talla">
+                            <option value="todas">Todas las tallas</option>
+                            <option value="S">S</option>
+                            <option value="M">M</option>
+                            <option value="L">L</option>
+                            <option value="XL">XL</option>
                         </select>
-                        <select class="filter-select" id="filterPrice" aria-label="Filtrar por precio">
+                        <select class="filter-select" data-filter="color">
+                            <option value="todos">Todos los colores</option>
+                            <option value="Rosado">Rosado</option>
+                            <option value="Blanco">Blanco</option>
+                            <option value="Negro">Negro</option>
+                            <option value="Azul">Azul</option>
+                        </select>
+                        <select class="filter-select" data-filter="precio">
                             <option value="todos">Todos los precios</option>
                             <option value="0-50000">Hasta $50.000</option>
                             <option value="50000-100000">$50.000 - $100.000</option>
                             <option value="100000-999999">Más de $100.000</option>
                         </select>
-                        <select class="filter-select" id="filterAvailability" aria-label="Filtrar por disponibilidad">
-                            <option value="todos">Disponibilidad</option>
-                            <option value="disponible">Disponible</option>
-                            <option value="agotado">Agotado</option>
+                        <select class="filter-select" data-filter="orden">
+                            <option value="relevancia">Relevancia</option>
+                            <option value="precio-asc">Precio: menor a mayor</option>
+                            <option value="precio-desc">Precio: mayor a menor</option>
+                            <option value="nuevo">Novedad</option>
                         </select>
-                        <label class="filter-check">
-                            <input type="checkbox" id="filterNew"> Solo nuevos
-                        </label>
-                        <label class="filter-check">
-                            <input type="checkbox" id="filterFeatured"> Solo destacados
-                        </label>
+                        <button class="btn btn--outline btn--sm clear-filters" data-category="mujer">Limpiar</button>
                     </div>
                 </div>
-                <div class="products-grid" id="productsGrid" aria-live="polite">
-                    <!-- Productos generados dinámicamente -->
-                </div>
-                <p class="no-results" id="noResults" style="display:none;">No se encontraron productos con esos criterios.</p>
+                <div class="products-grid" id="mujerGrid"></div>
+                <div class="pagination" id="pagination-mujer"></div>
             </div>
         </section>
 
-        <!-- Sección Pijamas -->
-        <section class="section section--alt" id="pijamas" aria-label="Colección de Pijamas">
+        <!-- ===== HOMBRE ===== -->
+        <section class="section page" id="page-hombre">
             <div class="container">
+                <nav class="breadcrumb"><a href="#inicio">Inicio</a> <span class="separator">›</span> <span>Hombre</span></nav>
                 <div class="section__header">
                     <span class="section__tag">Colección</span>
-                    <h2 class="section__title">Pijamas</h2>
-                    <p class="section__subtitle">Confort y estilo para tus noches más especiales.</p>
+                    <h2>Pijamas para Hombre</h2>
+                    <p>Comodidad y estilo clásico.</p>
                 </div>
-                <div class="banner banner--pijamas glass-light">
-                    <div class="banner__content">
-                        <h3>Suavidad que enamora</h3>
-                        <p>Telas premium que cuidan tu piel mientras descansas.</p>
+                <div class="catalog-tools">
+                    <div class="search-box">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+                        <input type="text" class="search-input" data-category="hombre" placeholder="Buscar por nombre...">
+                    </div>
+                    <div class="filters" id="filters-hombre">
+                        <select class="filter-select" data-filter="talla">
+                            <option value="todas">Todas las tallas</option>
+                            <option value="S">S</option>
+                            <option value="M">M</option>
+                            <option value="L">L</option>
+                            <option value="XL">XL</option>
+                        </select>
+                        <select class="filter-select" data-filter="color">
+                            <option value="todos">Todos los colores</option>
+                            <option value="Azul">Azul</option>
+                            <option value="Gris">Gris</option>
+                            <option value="Negro">Negro</option>
+                        </select>
+                        <select class="filter-select" data-filter="precio">
+                            <option value="todos">Todos los precios</option>
+                            <option value="0-50000">Hasta $50.000</option>
+                            <option value="50000-100000">$50.000 - $100.000</option>
+                            <option value="100000-999999">Más de $100.000</option>
+                        </select>
+                        <select class="filter-select" data-filter="orden">
+                            <option value="relevancia">Relevancia</option>
+                            <option value="precio-asc">Precio: menor a mayor</option>
+                            <option value="precio-desc">Precio: mayor a menor</option>
+                            <option value="nuevo">Novedad</option>
+                        </select>
+                        <button class="btn btn--outline btn--sm clear-filters" data-category="hombre">Limpiar</button>
                     </div>
                 </div>
-                <div class="products-grid" id="pijamasGrid" aria-live="polite"></div>
+                <div class="products-grid" id="hombreGrid"></div>
+                <div class="pagination" id="pagination-hombre"></div>
             </div>
         </section>
 
-        <!-- Sección Maquillaje -->
-        <section class="section" id="maquillaje" aria-label="Colección de Maquillaje">
+        <!-- ===== NIÑOS ===== -->
+        <section class="section page" id="page-ninos">
             <div class="container">
+                <nav class="breadcrumb"><a href="#inicio">Inicio</a> <span class="separator">›</span> <span>Niños</span></nav>
                 <div class="section__header">
-                    <span class="section__tag">Belleza</span>
-                    <h2 class="section__title">Maquillaje</h2>
-                    <p class="section__subtitle">Realza tu belleza natural con productos de alta calidad.</p>
+                    <span class="section__tag">Colección</span>
+                    <h2>Pijamas para Niños</h2>
+                    <p>Diversión y confort para los más pequeños.</p>
                 </div>
-                <div class="categories-chips" id="maquillajeChips" aria-label="Subcategorías de maquillaje">
-                    <button class="chip active" data-subcat="todas">Todas</button>
-                    <button class="chip" data-subcat="Labiales">Labiales</button>
-                    <button class="chip" data-subcat="Bases">Bases</button>
-                    <button class="chip" data-subcat="Correctores">Correctores</button>
-                    <button class="chip" data-subcat="Sombras">Sombras</button>
-                    <button class="chip" data-subcat="Rubores">Rubores</button>
-                    <button class="chip" data-subcat="Pestañinas">Pestañinas</button>
-                    <button class="chip" data-subcat="Brochas">Brochas</button>
-                    <button class="chip" data-subcat="Accesorios">Accesorios</button>
+                <div class="catalog-tools">
+                    <div class="search-box">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+                        <input type="text" class="search-input" data-category="ninos" placeholder="Buscar por nombre...">
+                    </div>
+                    <div class="filters" id="filters-ninos">
+                        <select class="filter-select" data-filter="talla">
+                            <option value="todas">Todas las tallas</option>
+                            <option value="4">4</option>
+                            <option value="6">6</option>
+                            <option value="8">8</option>
+                            <option value="10">10</option>
+                            <option value="12">12</option>
+                        </select>
+                        <select class="filter-select" data-filter="color">
+                            <option value="todos">Todos los colores</option>
+                            <option value="Verde">Verde</option>
+                            <option value="Azul">Azul</option>
+                            <option value="Rosado">Rosado</option>
+                            <option value="Amarillo">Amarillo</option>
+                        </select>
+                        <select class="filter-select" data-filter="precio">
+                            <option value="todos">Todos los precios</option>
+                            <option value="0-50000">Hasta $50.000</option>
+                            <option value="50000-100000">$50.000 - $100.000</option>
+                        </select>
+                        <select class="filter-select" data-filter="orden">
+                            <option value="relevancia">Relevancia</option>
+                            <option value="precio-asc">Precio: menor a mayor</option>
+                            <option value="precio-desc">Precio: mayor a menor</option>
+                            <option value="nuevo">Novedad</option>
+                        </select>
+                        <button class="btn btn--outline btn--sm clear-filters" data-category="ninos">Limpiar</button>
+                    </div>
                 </div>
-                <div class="products-grid" id="maquillajeGrid" aria-live="polite"></div>
+                <div class="products-grid" id="ninosGrid"></div>
+                <div class="pagination" id="pagination-ninos"></div>
             </div>
         </section>
 
-        <!-- Sección Nuevos -->
-        <section class="section section--alt" id="nuevos" aria-label="Productos nuevos">
+        <!-- ===== PAREJAS ===== -->
+        <section class="section page" id="page-parejas">
             <div class="container">
+                <nav class="breadcrumb"><a href="#inicio">Inicio</a> <span class="separator">›</span> <span>Parejas</span></nav>
                 <div class="section__header">
-                    <span class="section__tag">Recién llegados</span>
-                    <h2 class="section__title">Nuevos</h2>
+                    <span class="section__tag">Colección</span>
+                    <h2>Pijamas para Parejas</h2>
+                    <p>Conjuntos a juego para compartir momentos especiales.</p>
                 </div>
-                <div class="products-grid" id="nuevosGrid" aria-live="polite"></div>
+                <div class="catalog-tools">
+                    <div class="search-box">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+                        <input type="text" class="search-input" data-category="parejas" placeholder="Buscar por nombre...">
+                    </div>
+                    <div class="filters" id="filters-parejas">
+                        <select class="filter-select" data-filter="talla">
+                            <option value="todas">Todas las tallas</option>
+                            <option value="Ella S-M">Ella S-M</option>
+                            <option value="Ella M-L">Ella M-L</option>
+                            <option value="Él M-L">Él M-L</option>
+                            <option value="Él L-XL">Él L-XL</option>
+                        </select>
+                        <select class="filter-select" data-filter="color">
+                            <option value="todos">Todos los colores</option>
+                            <option value="Rojo">Rojo</option>
+                            <option value="Beige">Beige</option>
+                            <option value="Blanco">Blanco</option>
+                            <option value="Verde">Verde</option>
+                        </select>
+                        <select class="filter-select" data-filter="precio">
+                            <option value="todos">Todos los precios</option>
+                            <option value="0-50000">Hasta $50.000</option>
+                            <option value="50000-100000">$50.000 - $100.000</option>
+                            <option value="100000-999999">Más de $100.000</option>
+                        </select>
+                        <select class="filter-select" data-filter="orden">
+                            <option value="relevancia">Relevancia</option>
+                            <option value="precio-asc">Precio: menor a mayor</option>
+                            <option value="precio-desc">Precio: mayor a menor</option>
+                            <option value="nuevo">Novedad</option>
+                        </select>
+                        <button class="btn btn--outline btn--sm clear-filters" data-category="parejas">Limpiar</button>
+                    </div>
+                </div>
+                <div class="products-grid" id="parejasGrid"></div>
+                <div class="pagination" id="pagination-parejas"></div>
             </div>
         </section>
 
-        <!-- Sección Destacados -->
-        <section class="section" id="destacados" aria-label="Productos destacados">
+        <!-- ===== GUÍA DE TALLAS ===== -->
+        <section class="section page" id="page-guia-tallas">
             <div class="container">
+                <nav class="breadcrumb"><a href="#inicio">Inicio</a> <span class="separator">›</span> <span>Guía de Tallas</span></nav>
                 <div class="section__header">
-                    <span class="section__tag">Favoritos</span>
-                    <h2 class="section__title">Destacados</h2>
+                    <span class="section__tag">Guía</span>
+                    <h2>Guía de Tallas</h2>
+                    <p>Encuentra la talla perfecta para ti y tu familia.</p>
                 </div>
-                <div class="products-grid" id="destacadosGrid" aria-live="polite"></div>
-            </div>
-        </section>
-
-        <!-- Sección Nosotros -->
-        <section class="section section--alt" id="nosotros" aria-label="Sobre nosotros">
-            <div class="container about">
-                <div class="section__header">
-                    <span class="section__tag">Conócenos</span>
-                    <h2 class="section__title">Nosotros</h2>
-                </div>
-                <div class="about__grid">
-                    <div class="about__card glass-light">
-                        <h3>Nuestra Historia</h3>
-                        <p>Nacimos en 2020 con la misión de ofrecer productos que combinan calidad premium con diseño excepcional. Cada artículo de nuestro catálogo es cuidadosamente seleccionado para brindarte una experiencia única.</p>
-                    </div>
-                    <div class="about__card glass-light">
-                        <h3>Misión</h3>
-                        <p>Empoderar a nuestras clientas con productos que realzan su belleza y confort, manteniendo estándares de calidad excepcionales y un servicio personalizado.</p>
-                    </div>
-                    <div class="about__card glass-light">
-                        <h3>Visión</h3>
-                        <p>Ser el referente número uno en catálogo premium de pijamas y maquillaje en Latinoamérica, destacando por nuestra elegancia, confianza y cercanía.</p>
-                    </div>
-                    <div class="about__card glass-light">
-                        <h3>Valores</h3>
-                        <ul>
-                            <li>Calidad sin compromisos</li>
-                            <li>Atención personalizada</li>
-                            <li>Elegancia y buen gusto</li>
-                            <li>Confianza y transparencia</li>
-                            <li>Innovación constante</li>
-                        </ul>
-                    </div>
+                <div class="tallas-table-wrapper glass-light">
+                    <table class="tallas-table">
+                        <thead><tr><th>Categoría</th><th>Talla</th><th>Pecho (cm)</th><th>Cintura (cm)</th><th>Cadera (cm)</th><th>Largo (cm)</th></tr></thead>
+                        <tbody>
+                            <tr><td>Mujer</td><td>S</td><td>86</td><td>66</td><td>92</td><td>70</td></tr>
+                            <tr><td>Mujer</td><td>M</td><td>92</td><td>72</td><td>98</td><td>72</td></tr>
+                            <tr><td>Mujer</td><td>L</td><td>98</td><td>78</td><td>104</td><td>74</td></tr>
+                            <tr><td>Hombre</td><td>S</td><td>96</td><td>78</td><td>96</td><td>76</td></tr>
+                            <tr><td>Hombre</td><td>M</td><td>102</td><td>84</td><td>102</td><td>78</td></tr>
+                            <tr><td>Hombre</td><td>L</td><td>108</td><td>90</td><td>108</td><td>80</td></tr>
+                            <tr><td>Niños (6-8)</td><td>6</td><td>60</td><td>54</td><td>64</td><td>50</td></tr>
+                            <tr><td>Niños (8-10)</td><td>8</td><td>64</td><td>56</td><td>68</td><td>54</td></tr>
+                            <tr><td>Niños (10-12)</td><td>10</td><td>68</td><td>58</td><td>72</td><td>58</td></tr>
+                        </tbody>
+                    </table>
+                    <p class="tallas-nota"><strong>Nota:</strong> Medidas orientativas. Recomendamos medir tu cuerpo y comparar con la tabla.</p>
                 </div>
             </div>
         </section>
 
-        <!-- Sección FAQ -->
-        <section class="section" id="faq" aria-label="Preguntas frecuentes">
+        <!-- ===== FAQ ===== -->
+        <section class="section page" id="page-faq">
             <div class="container">
+                <nav class="breadcrumb"><a href="#inicio">Inicio</a> <span class="separator">›</span> <span>FAQ</span></nav>
                 <div class="section__header">
                     <span class="section__tag">Ayuda</span>
-                    <h2 class="section__title">Preguntas Frecuentes</h2>
+                    <h2>Preguntas Frecuentes</h2>
                 </div>
                 <div class="accordion" id="faqAccordion">
                     <div class="accordion__item">
-                        <button class="accordion__trigger" aria-expanded="false">
-                            ¿Cómo realizo un pedido?
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
-                        </button>
-                        <div class="accordion__panel"><p>Simplemente haz clic en el botón de WhatsApp en cualquier producto y serás redirigida a una conversación con nosotras. Te atenderemos personalmente para concretar tu pedido.</p></div>
+                        <button class="accordion__trigger">¿Cómo realizo un pedido? <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></button>
+                        <div class="accordion__panel"><p>Haz clic en el botón de WhatsApp en cualquier producto, selecciona talla y color, y el mensaje se enviará automáticamente con todos los detalles.</p></div>
                     </div>
                     <div class="accordion__item">
-                        <button class="accordion__trigger" aria-expanded="false">
-                            ¿Qué métodos de pago aceptan?
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
-                        </button>
-                        <div class="accordion__panel"><p>Aceptamos transferencias bancarias, pagos por Nequi, Daviplata, y en algunas zonas pago contra entrega. Consúltanos por WhatsApp para más detalles.</p></div>
+                        <button class="accordion__trigger">¿Qué métodos de pago aceptan? <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></button>
+                        <div class="accordion__panel"><p>Aceptamos transferencias bancarias, Nequi, Daviplata y pago contra entrega en algunas zonas.</p></div>
                     </div>
                     <div class="accordion__item">
-                        <button class="accordion__trigger" aria-expanded="false">
-                            ¿Hacen envíos a todo el país?
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
-                        </button>
-                        <div class="accordion__panel"><p>Sí, realizamos envíos a todo Colombia a través de empresas de mensajería confiables. El costo y tiempo de entrega varían según tu ubicación.</p></div>
+                        <button class="accordion__trigger">¿Hacen envíos a todo el país? <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></button>
+                        <div class="accordion__panel"><p>Sí, realizamos envíos a todo Colombia a través de empresas de mensajería confiables.</p></div>
                     </div>
                     <div class="accordion__item">
-                        <button class="accordion__trigger" aria-expanded="false">
-                            ¿Puedo devolver un producto?
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
-                        </button>
-                        <div class="accordion__panel"><p>Aceptamos devoluciones dentro de los 5 días posteriores a la entrega, siempre que el producto no haya sido usado y conserve su empaque original. Contáctanos por WhatsApp para gestionar tu devolución.</p></div>
+                        <button class="accordion__trigger">¿Puedo devolver un producto? <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></button>
+                        <div class="accordion__panel"><p>Aceptamos devoluciones dentro de los 5 días posteriores a la entrega, siempre que el producto no haya sido usado y conserve su empaque original.</p></div>
                     </div>
+                </div>
+                <div class="privacy-policy" id="privacidad">
+                    <h3>Política de Tratamiento de Datos</h3>
+                    <p>En <strong>Lumina</strong> nos comprometemos a proteger tu privacidad. Los datos personales que nos suministres serán utilizados únicamente para procesar tus pedidos y consultas, y para enviarte información sobre promociones (si has dado tu consentimiento). No compartimos tus datos con terceros. Puedes solicitar la actualización o eliminación de tus datos en cualquier momento escribiéndonos a <a href="mailto:contacto@lumina.com">contacto@lumina.com</a>.</p>
                 </div>
             </div>
         </section>
 
-        <!-- Sección Contacto -->
-        <section class="section section--alt" id="contacto" aria-label="Contacto">
+        <!-- ===== CONTACTO ===== -->
+        <section class="section page" id="page-contacto">
             <div class="container">
+                <nav class="breadcrumb"><a href="#inicio">Inicio</a> <span class="separator">›</span> <span>Contacto</span></nav>
                 <div class="section__header">
                     <span class="section__tag">Conéctate</span>
-                    <h2 class="section__title">Contacto</h2>
+                    <h2>Contacto</h2>
                 </div>
                 <div class="contact-grid">
-                    <a href="https://wa.me/57XXXXXXXXX" target="_blank" rel="noopener" class="contact-card glass-light">
-                        <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg>
+                    <a href="https://wa.me/57XXXXXXXXX" target="_blank" class="contact-card glass-light">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884"/></svg>
                         <span>WhatsApp</span>
                     </a>
-                    <a href="https://instagram.com" target="_blank" rel="noopener" class="contact-card glass-light">
+                    <a href="https://instagram.com" target="_blank" class="contact-card glass-light">
                         <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
                         <span>Instagram</span>
                     </a>
-                    <a href="https://facebook.com" target="_blank" rel="noopener" class="contact-card glass-light">
+                    <a href="https://facebook.com" target="_blank" class="contact-card glass-light">
                         <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
                         <span>Facebook</span>
                     </a>
-                    <a href="https://tiktok.com" target="_blank" rel="noopener" class="contact-card glass-light">
+                    <a href="https://tiktok.com" target="_blank" class="contact-card glass-light">
                         <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg>
                         <span>TikTok</span>
                     </a>
@@ -285,65 +432,76 @@
                         <span>Colombia</span>
                     </div>
                 </div>
+                <div class="newsletter glass-light">
+                    <h3>Suscríbete a nuestro newsletter</h3>
+                    <p>Recibe ofertas exclusivas y novedades antes que nadie.</p>
+                    <form id="newsletterForm" class="newsletter-form">
+                        <input type="email" id="newsletterEmail" placeholder="Tu correo electrónico" required>
+                        <button type="submit" class="btn btn--primary">Suscribirme</button>
+                    </form>
+                    <div id="newsletterMsg" class="newsletter-msg"></div>
+                </div>
             </div>
         </section>
     </main>
 
     <!-- Footer -->
-    <footer class="footer" role="contentinfo">
+    <footer class="footer">
         <div class="container footer__inner">
             <div class="footer__brand">
                 <span class="logo">LUMINA</span>
-                <p>Catálogo premium de pijamas y maquillaje. Calidad que se siente, belleza que se ve.</p>
+                <p>Pijamas premium para mujer, hombre, niños y parejas.</p>
             </div>
             <div class="footer__links">
                 <h4>Enlaces</h4>
                 <a href="#inicio">Inicio</a>
-                <a href="#catalogo">Catálogo</a>
-                <a href="#pijamas">Pijamas</a>
-                <a href="#maquillaje">Maquillaje</a>
+                <a href="#mujer">Mujer</a>
+                <a href="#hombre">Hombre</a>
+                <a href="#ninos">Niños</a>
+                <a href="#parejas">Parejas</a>
+                <a href="#guia-tallas">Guía de Tallas</a>
                 <a href="#faq">FAQ</a>
+                <a href="#contacto">Contacto</a>
+                <a href="#privacidad">Política de Privacidad</a>
             </div>
             <div class="footer__social">
                 <h4>Síguenos</h4>
                 <div class="footer__social-icons">
-                    <a href="https://instagram.com" target="_blank" rel="noopener" aria-label="Instagram"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg></a>
-                    <a href="https://facebook.com" target="_blank" rel="noopener" aria-label="Facebook"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg></a>
-                    <a href="https://tiktok.com" target="_blank" rel="noopener" aria-label="TikTok"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg></a>
+                    <a href="https://instagram.com" target="_blank"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg></a>
+                    <a href="https://facebook.com" target="_blank"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg></a>
+                    <a href="https://tiktok.com" target="_blank"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg></a>
                 </div>
             </div>
         </div>
         <div class="footer__bottom container">
-            <p>&copy; 2026 Lumina. Todos los derechos reservados.</p>
+            <p>&copy; 2026 Lumina. Todos los derechos reservados. | <a href="#privacidad">Política de Privacidad</a></p>
         </div>
     </footer>
 
-    <!-- Botón flotante WhatsApp -->
-    <a href="https://wa.me/57XXXXXXXXX?text=Hola,%20vengo%20del%20cat%C3%A1logo%20y%20me%20gustar%C3%ADa%20m%C3%A1s%20informaci%C3%B3n." target="_blank" rel="noopener" class="whatsapp-float" id="whatsappFloat" aria-label="Contactar por WhatsApp">
+    <!-- WhatsApp flotante -->
+    <a href="https://wa.me/57XXXXXXXXX?text=Hola,%20vengo%20del%20cat%C3%A1logo" target="_blank" class="whatsapp-float" id="whatsappFloat">
         <svg width="28" height="28" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884"/></svg>
     </a>
 
-    <!-- Botón Volver arriba -->
-    <button class="back-to-top" id="backToTop" aria-label="Volver arriba">
+    <!-- Botón volver arriba -->
+    <button class="back-to-top" id="backToTop">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 15l-6-6-6 6"/></svg>
     </button>
 
-    <!-- Modal de detalle del producto -->
-    <div class="modal" id="productModal" aria-hidden="true" role="dialog" aria-modal="true">
+    <!-- Modal de producto -->
+    <div class="modal" id="productModal" aria-hidden="true">
         <div class="modal__backdrop" id="modalBackdrop"></div>
         <div class="modal__content glass-light" id="modalContent">
-            <button class="modal__close" id="modalClose" aria-label="Cerrar">&times;</button>
-            <div class="modal__body" id="modalBody">
-                <!-- Contenido dinámico -->
-            </div>
+            <button class="modal__close" id="modalClose">&times;</button>
+            <div class="modal__body" id="modalBody"></div>
         </div>
     </div>
 
     <!-- Modal de favoritos -->
-    <div class="modal" id="favoritesModal" aria-hidden="true" role="dialog" aria-modal="true">
+    <div class="modal" id="favoritesModal" aria-hidden="true">
         <div class="modal__backdrop" id="favBackdrop"></div>
         <div class="modal__content modal__content--sm glass-light">
-            <button class="modal__close" id="favClose" aria-label="Cerrar">&times;</button>
+            <button class="modal__close" id="favClose">&times;</button>
             <h3>Mis Favoritos</h3>
             <div class="favorites-list" id="favoritesList">
                 <p class="empty-msg">No tienes productos favoritos aún.</p>
@@ -351,8 +509,31 @@
         </div>
     </div>
 
-    <!-- Toast de notificación -->
-    <div class="toast" id="toast" aria-live="polite" aria-atomic="true"></div>
+    <!-- Toast -->
+    <div class="toast" id="toast"></div>
+
+    <!-- Google Analytics (reemplazar ID) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-XXXXXXXXXX');
+    </script>
+    <!-- Meta Pixel (reemplazar ID) -->
+    <script>
+        !function(f,b,e,v,n,t,s)
+        {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+        n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+        if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+        n.queue=[];t=b.createElement(e);t.async=!0;
+        t.src=v;s=b.getElementsByTagName(e)[0];
+        s.parentNode.insertBefore(t,s)}(window, document,'script',
+        'https://connect.facebook.net/en_US/fbevents.js');
+        fbq('init', 'XXXXXXXXXXXXXXX');
+        fbq('track', 'PageView');
+    </script>
+    <noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=XXXXXXXXXXXXXXX&ev=PageView&noscript=1"/></noscript>
 
     <script src="js/catalogo.js"></script>
     <script src="js/app.js"></script>
