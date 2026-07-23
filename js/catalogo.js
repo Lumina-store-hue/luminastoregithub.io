@@ -1,4 +1,7 @@
-const productos = [
+// ===== CATÁLOGO DE PRODUCTOS (POR DEFECTO) =====
+console.log('📦 catalogo.js cargado (productos por defecto)');
+
+const productosDefault = [
     // ===== MUJER (5) =====
     {
         id: 1,
@@ -6,13 +9,13 @@ const productos = [
         precio: "$75.000",
         categoria: "mujer",
         descripcion: "Tela de seda suave, escote en V, manga larga. Perfecta para noches especiales.",
-        imagenes: ["img/productos/pijama-seda-rosada.jpg", "img/productos/pijama-seda-rosada2.jpg"],
+        imagenes: ["img/productos/mujer-seda-rosada.jpg"],
         tallas: ["S", "M", "L"],
+        stockPorTalla: { "S": 5, "M": 3, "L": 2 },
         colores: ["Rosado", "Blanco"],
         nuevo: true,
         destacado: true,
         agotado: false,
-        stock: 5,
         whatsapp: "Hola, quiero la Pijama Seda Rosada"
     },
     {
@@ -21,13 +24,13 @@ const productos = [
         precio: "$60.000",
         categoria: "mujer",
         descripcion: "Algodón 100% con estampado de lunares. Cómoda y fresca.",
-        imagenes: ["img/productos/mujer-estampada.jpg", "img/productos/mujer-estampada2.jpg"],
+        imagenes: ["img/productos/mujer-estampada.jpg"],
         tallas: ["S", "M", "L"],
+        stockPorTalla: { "S": 8, "M": 5, "L": 3 },
         colores: ["Blanco/Negro"],
         nuevo: false,
         destacado: false,
         agotado: false,
-        stock: 8,
         whatsapp: "Hola, quiero la Pijama Algodón Estampado"
     },
     {
@@ -36,13 +39,13 @@ const productos = [
         precio: "$85.000",
         categoria: "mujer",
         descripcion: "Elegante pijama con detalles de encaje en escote y mangas. Ideal para ocasiones especiales.",
-        imagenes: ["img/productos/pijama-encaje-negro.jpg", "img/productos/pijama-encaje-negro2.jpg"],
+        imagenes: ["img/productos/pijama-encaje-negro.jpg"],
         tallas: ["S", "M"],
+        stockPorTalla: { "S": 2, "M": 1 },
         colores: ["Negro"],
         nuevo: true,
         destacado: true,
         agotado: false,
-        stock: 2,
         whatsapp: "Hola, quiero la Pijama Encaje Negro"
     },
     {
@@ -51,13 +54,13 @@ const productos = [
         precio: "$95.000",
         categoria: "mujer",
         descripcion: "Pijama térmica de felpa, ideal para noches frías. Suave y calentita.",
-        imagenes: ["img/productos/pijama-termica.jpg", "img/productos/pijama-termica2.jpg"],
+        imagenes: ["img/productos/pijama-termica.jpg"],
         tallas: ["M", "L", "XL"],
+        stockPorTalla: { "M": 0, "L": 0, "XL": 0 },
         colores: ["Gris", "Azul marino"],
         nuevo: false,
         destacado: false,
         agotado: true,
-        stock: 0,
         whatsapp: "Hola, quiero la Pijama Térmica Invierno"
     },
     {
@@ -66,13 +69,13 @@ const productos = [
         precio: "$70.000",
         categoria: "mujer",
         descripcion: "Pijama de lino fresco, perfecta para climas cálidos. Manga corta y pantalón corto.",
-        imagenes: ["img/productos/pijama-lino.jpg", "img/productos/pijama-lino2.jpg"],
+        imagenes: ["img/productos/pijama-lino.jpg"],
         tallas: ["S", "M", "L"],
+        stockPorTalla: { "S": 6, "M": 4, "L": 2 },
         colores: ["Beige", "Blanco"],
         nuevo: false,
         destacado: false,
         agotado: false,
-        stock: 6,
         whatsapp: "Hola, quiero la Pijama Verano Lino"
     },
     // ===== HOMBRE (4) =====
@@ -82,13 +85,13 @@ const productos = [
         precio: "$70.000",
         categoria: "hombre",
         descripcion: "Camisa y pantalón de algodón, corte relajado. Colores neutros.",
-        imagenes: ["img/productos/pijama-clasica-hombre.jpg", "img/productos/pijama-clasica-hombre2.jpg"],
+        imagenes: ["img/productos/hombre-clasico.jpg"],
         tallas: ["S", "M", "L", "XL"],
+        stockPorTalla: { "S": 4, "M": 6, "L": 3, "XL": 2 },
         colores: ["Azul marino", "Gris"],
         nuevo: false,
         destacado: true,
         agotado: false,
-        stock: 4,
         whatsapp: "Hola, quiero la Pijama Hombre Clásico"
     },
     {
@@ -97,13 +100,13 @@ const productos = [
         precio: "$68.000",
         categoria: "hombre",
         descripcion: "Estampado de cuadros, botones frontales. 100% algodón.",
-        imagenes: ["img/productos/pijama-estampado-hombre.jpg", "img/productos/pijama-estampado-hombre2.jpg"],
+        imagenes: ["img/productos/hombre-estampado.jpg"],
         tallas: ["M", "L", "XL"],
+        stockPorTalla: { "M": 7, "L": 4, "XL": 2 },
         colores: ["Rojo/Cuadros"],
         nuevo: true,
         destacado: false,
         agotado: false,
-        stock: 7,
         whatsapp: "Hola, quiero la Pijama Hombre con Estampado"
     },
     {
@@ -112,13 +115,13 @@ const productos = [
         precio: "$90.000",
         categoria: "hombre",
         descripcion: "Pijama de seda con botonadura y cuello clásico. Elegancia y confort.",
-        imagenes: ["img/productos/pijama-seda-hombre.jpg", "img/productos/pijama-seda-hombre2.jpg"],
+        imagenes: ["img/productos/hombre-seda.jpg"],
         tallas: ["M", "L"],
+        stockPorTalla: { "M": 3, "L": 2 },
         colores: ["Negro", "Azul"],
         nuevo: true,
         destacado: false,
         agotado: false,
-        stock: 3,
         whatsapp: "Hola, quiero la Pijama Hombre Seda"
     },
     {
@@ -127,13 +130,13 @@ const productos = [
         precio: "$80.000",
         categoria: "hombre",
         descripcion: "Pijama térmico de algodón, perfecto para el invierno.",
-        imagenes: ["img/productos/pijama-termica-hombre.jpg", "img/productos/pijama-termica-hombre2.jpg"],
+        imagenes: ["img/productos/hombre-termico.jpg"],
         tallas: ["L", "XL"],
+        stockPorTalla: { "L": 0, "XL": 0 },
         colores: ["Gris oscuro"],
         nuevo: false,
         destacado: false,
         agotado: true,
-        stock: 0,
         whatsapp: "Hola, quiero la Pijama Hombre Térmico"
     },
     // ===== NIÑOS (4) =====
@@ -143,13 +146,13 @@ const productos = [
         precio: "$45.000",
         categoria: "ninos",
         descripcion: "Pijama de algodón con estampado de dinosaurios. Manga larga y pantalón.",
-        imagenes: ["img/productos/pijama-dino.jpg", "img/productos/pijama-dino2.jpg"],
+        imagenes: ["img/productos/nino-dinosaurio.jpg"],
         tallas: ["4", "6", "8", "10"],
+        stockPorTalla: { "4": 10, "6": 8, "8": 5, "10": 3 },
         colores: ["Verde", "Azul"],
         nuevo: true,
         destacado: true,
         agotado: false,
-        stock: 10,
         whatsapp: "Hola, quiero la Pijama Niño Dinosaurio"
     },
     {
@@ -158,13 +161,13 @@ const productos = [
         precio: "$45.000",
         categoria: "ninos",
         descripcion: "Pijama de algodón con unicornios y brillos. Ideal para soñar.",
-        imagenes: ["img/productos/pijama-unicornio-nina.jpg", "img/productos/pijama-unicornio-nina2.jpg"],
+        imagenes: ["img/productos/nina-unicornio.jpg"],
         tallas: ["4", "6", "8", "10"],
+        stockPorTalla: { "4": 6, "6": 4, "8": 2, "10": 1 },
         colores: ["Rosado", "Blanco"],
         nuevo: false,
         destacado: false,
         agotado: false,
-        stock: 6,
         whatsapp: "Hola, quiero la Pijama Niña Unicornio"
     },
     {
@@ -173,13 +176,13 @@ const productos = [
         precio: "$48.000",
         categoria: "ninos",
         descripcion: "Pijama con estampado de cohetes y planetas. Algodón suave.",
-        imagenes: ["img/productos/pijama-espacio.jpg", "img/productos/pijama-espacio2.jpg"],
+        imagenes: ["img/productos/nino-espacial.jpg"],
         tallas: ["6", "8", "10", "12"],
+        stockPorTalla: { "6": 4, "8": 3, "10": 2, "12": 1 },
         colores: ["Azul", "Negro"],
         nuevo: true,
         destacado: false,
         agotado: false,
-        stock: 4,
         whatsapp: "Hola, quiero la Pijama Niño Espacial"
     },
     {
@@ -188,13 +191,13 @@ const productos = [
         precio: "$50.000",
         categoria: "ninos",
         descripcion: "Pijama con volantes y estampado de princesas. Tejido suave.",
-        imagenes: ["img/productos/pijama-princesa.jpg", "img/productos/pijama-princesa2.jpg"],
+        imagenes: ["img/productos/nina-princesa.jpg"],
         tallas: ["4", "6", "8"],
+        stockPorTalla: { "4": 0, "6": 0, "8": 0 },
         colores: ["Rosado", "Lila"],
         nuevo: false,
         destacado: false,
         agotado: true,
-        stock: 0,
         whatsapp: "Hola, quiero la Pijama Niña Princesa"
     },
     // ===== PAREJAS (3) =====
@@ -204,13 +207,13 @@ const productos = [
         precio: "$130.000",
         categoria: "parejas",
         descripcion: "Set de 2 pijamas (ella y él) con estampado de corazones. Incluye bolsa de regalo.",
-        imagenes: ["img/productos/conjunto-corazones.jpg", "img/productos/conjunto-corazones2.jpg"],
+        imagenes: ["img/productos/pareja-corazones.jpg"],
         tallas: ["Ella S-M", "Él M-L"],
+        stockPorTalla: { "Ella S-M": 3, "Él M-L": 2 },
         colores: ["Rojo/Blanco"],
         nuevo: true,
         destacado: true,
         agotado: false,
-        stock: 3,
         whatsapp: "Hola, quiero el Conjunto Pareja Corazones"
     },
     {
@@ -219,13 +222,13 @@ const productos = [
         precio: "$140.000",
         categoria: "parejas",
         descripcion: "Pijamas de lino para él y ella, perfectas para clima cálido.",
-        imagenes: ["img/productos/conjunto-lino.jpg", "img/productos/conjunto-lino2.jpg"],
+        imagenes: ["img/productos/pareja-lino.jpg"],
         tallas: ["Ella S-M", "Él M-L"],
+        stockPorTalla: { "Ella S-M": 4, "Él M-L": 3 },
         colores: ["Beige", "Blanco"],
         nuevo: false,
         destacado: false,
         agotado: false,
-        stock: 4,
         whatsapp: "Hola, quiero el Conjunto Pareja Lino"
     },
     {
@@ -234,13 +237,15 @@ const productos = [
         precio: "$150.000",
         categoria: "parejas",
         descripcion: "Pijamas con estampado navideño, perfectas para las fiestas.",
-        imagenes: ["img/productos/conjunto-navidad.jpg", "img/productos/conjunto-navidad2.jpg"],
+        imagenes: ["img/productos/pareja-navidad.jpg"],
         tallas: ["Ella M-L", "Él L-XL"],
+        stockPorTalla: { "Ella M-L": 2, "Él L-XL": 1 },
         colores: ["Rojo/Verde"],
         nuevo: true,
         destacado: true,
         agotado: false,
-        stock: 2,
         whatsapp: "Hola, quiero el Conjunto Pareja Navideño"
     }
 ];
+
+console.log('✅ productosDefault cargados:', productosDefault.length);
