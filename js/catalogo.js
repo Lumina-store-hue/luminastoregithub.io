@@ -1,5 +1,5 @@
-// ===== CATÁLOGO DE PRODUCTOS (POR DEFECTO) =====
-console.log('📦 catalogo.js cargado (productos por defecto)');
+// ===== CATÁLOGO DE PRODUCTOS (CON TUS IMÁGENES REALES) =====
+console.log('📦 catalogo.js cargado');
 
 const productosDefault = [
     // ===== MUJER (5) =====

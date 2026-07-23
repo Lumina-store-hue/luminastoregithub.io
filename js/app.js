@@ -3,27 +3,12 @@ console.log('🚀 app.js cargado');
 
 // === CONFIGURACIÓN ===
 const WHATSAPP_NUMBER = '57XXXXXXXXX'; // Cambia por tu número
-const ONESIGNAL_APP_ID = 'TU_APP_ID_DE_ONESIGNAL'; // ← Reemplaza con tu App ID
-
-// === ESTADO GLOBAL ===
-let productos = [];
-let currentProduct = null;
-let selectedOptions = { talla: '', color: '' };
-let favorites = JSON.parse(localStorage.getItem('lumina_favs') || '[]');
-let cart = JSON.parse(localStorage.getItem('lumina_cart') || '[]');
-let reviews = JSON.parse(localStorage.getItem('lumina_reviews') || '{}');
-let currentPage = {};
-let itemsPerPage = 6;
-let activeFilters = {};
-let searchTerms = {};
-let editingId = null;
-let oneSignalInitialized = false;
-
-// === DOM HELPERS ===
-const $ = (sel) => document.querySelector(sel);
-const $$ = (sel) => document.querySelectorAll(sel);
 
 // === FUNCIONES AUXILIARES ===
+function getPlaceholderImage(nombre) {
+    return `data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22300%22 height=%22300%22 viewBox=%220 0 300 300%22%3E%3Crect width=%22300%22 height=%22300%22 fill=%22%23f0e0e5%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-family=%22Arial%2C sans-serif%22 font-size=%2218%22 fill=%22%23999%22 text-anchor=%22middle%22 dominant-baseline=%22central%22%3E${encodeURIComponent(nombre)}%3C/text%3E%3C/svg%3E`;
+}
+
 function formatPrice(priceStr) {
     return parseInt(priceStr.replace(/[^0-9]/g, ''));
 }
@@ -46,6 +31,23 @@ function getColorHex(colorName) {
     };
     return map[colorName] || colorName.toLowerCase();
 }
+
+// === ESTADO GLOBAL ===
+let productos = [];
+let currentProduct = null;
+let selectedOptions = { talla: '', color: '' };
+let favorites = JSON.parse(localStorage.getItem('lumina_favs') || '[]');
+let cart = JSON.parse(localStorage.getItem('lumina_cart') || '[]');
+let reviews = JSON.parse(localStorage.getItem('lumina_reviews') || '{}');
+let currentPage = {};
+let itemsPerPage = 6;
+let activeFilters = {};
+let searchTerms = {};
+let editingId = null;
+
+// === DOM HELPERS ===
+const $ = (sel) => document.querySelector(sel);
+const $$ = (sel) => document.querySelectorAll(sel);
 
 // === GESTIÓN DE PRODUCTOS ===
 async function loadProducts() {
@@ -74,7 +76,7 @@ async function loadProducts() {
         console.warn('⚠️ No se pudo cargar productos.json, usando respaldo:', error);
     }
     if (typeof productosDefault !== 'undefined' && Array.isArray(productosDefault)) {
-        productos = [...productosDefault];
+        productos = JSON.parse(JSON.stringify(productosDefault));
         localStorage.setItem('lumina_productos', JSON.stringify(productos));
         console.log('📦 Productos cargados desde productosDefault:', productos.length);
     } else {
@@ -93,7 +95,7 @@ function getNextId() {
     return max + 1;
 }
 
-// === RESEÑAS Y VALORACIONES ===
+// === RESEÑAS ===
 function getProductReviews(productId) {
     return reviews[productId] || [];
 }
@@ -107,7 +109,6 @@ function addReview(productId, nombre, calificacion, comentario) {
         fecha: new Date().toLocaleDateString('es-CO')
     });
     localStorage.setItem('lumina_reviews', JSON.stringify(reviews));
-    // Actualizar la vista si el modal está abierto
     if (currentProduct && currentProduct.id === productId) {
         renderReviewsInModal(productId);
     }
@@ -182,16 +183,12 @@ function addToCart(productId, talla, color, cantidad = 1) {
             talla: talla,
             color: color,
             cantidad: cantidad,
-            imagen: product.imagenes[0] || 'img/placeholder.jpg'
+            imagen: product.imagenes && product.imagenes[0] ? product.imagenes[0] : getPlaceholderImage(product.nombre)
         });
     }
     localStorage.setItem('lumina_cart', JSON.stringify(cart));
     updateCartBadge();
     showToast(`✅ Agregado al carrito: ${product.nombre} (${talla})`);
-    // Notificación push de carrito abandonado (se activa si el carrito tiene items)
-    if (cart.length > 0) {
-        triggerAbandonedCartNotification();
-    }
     return true;
 }
 
@@ -251,8 +248,9 @@ function renderCartModal() {
     cart.forEach((item, index) => {
         const div = document.createElement('div');
         div.className = 'cart-item';
+        const imgSrc = item.imagen || getPlaceholderImage(item.nombre);
         div.innerHTML = `
-            <img src="${item.imagen}" alt="${item.nombre}">
+            <img src="${imgSrc}" alt="${item.nombre}" onerror="this.src='${getPlaceholderImage(item.nombre)}'">
             <div class="info">
                 <div class="name">${item.nombre}</div>
                 <div class="details">Talla: ${item.talla} | Color: ${item.color || 'N/A'}</div>
@@ -307,46 +305,7 @@ function sendCartByWhatsApp() {
     msg += '\n\n¡Gracias!';
     const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`;
     window.open(url, '_blank');
-    // Limpiar carrito después de enviar
     clearCart();
-}
-
-// === NOTIFICACIONES PUSH (OneSignal) ===
-async function triggerAbandonedCartNotification() {
-    if (!oneSignalInitialized) return;
-    try {
-        const OneSignal = window.OneSignal;
-        if (!OneSignal) return;
-        // Verificar si el usuario está suscrito
-        const isSubscribed = await OneSignal.Notifications.permission;
-        if (isSubscribed) {
-            const cartItems = cart.map(item => `${item.nombre} x${item.cantidad}`).join(', ');
-            await OneSignal.Notifications.addTrigger('cart_abandoned', {
-                message: `🛒 ¡Tienes ${cart.length} productos en tu carrito! No dejes pasar esta oportunidad.`,
-                url: window.location.href + '#contacto'
-            });
-            console.log('🔔 Notificación de carrito abandonado enviada');
-        }
-    } catch (error) {
-        console.warn('⚠️ Error al enviar notificación push:', error);
-    }
-}
-
-function initOneSignal() {
-    if (typeof OneSignal === 'undefined') {
-        console.warn('⚠️ OneSignal no está cargado');
-        return;
-    }
-    OneSignalDeferred.push(async function(OneSignal) {
-        await OneSignal.init({
-            appId: ONESIGNAL_APP_ID,
-            serviceWorkerOverrideForTypical: true,
-            path: "https://TU_DOMINIO.onesignal.com/sdk_files/",
-            serviceWorkerParam: { scope: "/" },
-        });
-        oneSignalInitialized = true;
-        console.log('🔔 OneSignal inicializado');
-    });
 }
 
 // === FAVORITOS ===
@@ -373,10 +332,11 @@ function openFavoritesModal() {
         list.innerHTML = '<p class="empty-msg">No tienes productos favoritos aún.</p>';
     } else {
         favProducts.forEach(prod => {
+            const imgSrc = prod.imagenes && prod.imagenes[0] ? prod.imagenes[0] : getPlaceholderImage(prod.nombre);
             const item = document.createElement('div');
             item.className = 'fav-item';
             item.innerHTML = `
-                <img src="${prod.imagenes[0] || 'img/placeholder.jpg'}" alt="${prod.nombre}">
+                <img src="${imgSrc}" alt="${prod.nombre}" onerror="this.src='${getPlaceholderImage(prod.nombre)}'">
                 <div class="info">
                     <strong>${prod.nombre}</strong>
                     <span>${prod.precio}</span>
@@ -399,7 +359,7 @@ function createProductCard(product) {
     const card = document.createElement('div');
     card.className = 'product-card';
     
-    const imgSrc = product.imagenes && product.imagenes[0] ? product.imagenes[0] : 'img/placeholder.jpg';
+    const imgSrc = product.imagenes && product.imagenes[0] ? product.imagenes[0] : getPlaceholderImage(product.nombre);
     const colorDots = product.colores ? product.colores.map(c => `<span class="color-dot" style="background:${getColorHex(c)}" title="${c}"></span>`).join('') : '';
     const productReviews = getProductReviews(product.id);
     const avgRating = productReviews.length > 0 ? (productReviews.reduce((sum, r) => sum + r.calificacion, 0) / productReviews.length) : 0;
@@ -417,7 +377,7 @@ function createProductCard(product) {
     
     card.innerHTML = `
         <div class="image">
-            <img src="${imgSrc}" alt="${product.nombre}" loading="lazy">
+            <img src="${imgSrc}" alt="${product.nombre}" loading="lazy" onerror="this.src='${getPlaceholderImage(product.nombre)}'">
         </div>
         <h3>${product.nombre}</h3>
         <div class="price">${product.precio}</div>
@@ -541,7 +501,6 @@ function navigateTo(sectionId) {
     $$('.nav-link').forEach(link => {
         link.classList.toggle('active', link.dataset.section === sectionId);
     });
-    // Cerrar menú móvil
     const nav = document.getElementById('nav');
     const toggle = document.getElementById('navToggle');
     if (nav && nav.classList.contains('open')) {
@@ -557,14 +516,14 @@ function handleHashChange() {
     navigateTo(hash);
 }
 
-// === MODAL DE PRODUCTO (con reseñas) ===
+// === MODAL DE PRODUCTO ===
 function openProductModal(product, modoCarrito = false) {
     currentProduct = product;
     selectedOptions = { talla: '', color: '' };
     const overlay = $('#productModal');
     const content = $('#modalContent');
     
-    const imgSrc = product.imagenes && product.imagenes[0] ? product.imagenes[0] : 'img/placeholder.jpg';
+    const imgSrc = product.imagenes && product.imagenes[0] ? product.imagenes[0] : getPlaceholderImage(product.nombre);
     const tallasOptions = product.tallas ? product.tallas.map(t => `<option value="${t}">${t}</option>`).join('') : '';
     const coloresOptions = product.colores ? product.colores.map(c => `<option value="${c}">${c}</option>`).join('') : '';
     
@@ -584,12 +543,10 @@ function openProductModal(product, modoCarrito = false) {
         stockHTML += '</div>';
     }
     
-    // Reseñas
     const productReviews = getProductReviews(product.id);
     const avgRating = productReviews.length > 0 ? (productReviews.reduce((sum, r) => sum + r.calificacion, 0) / productReviews.length) : 0;
     const starsDisplay = productReviews.length > 0 ? `<span style="color:#f5b342;font-size:1.1rem;">${'★'.repeat(Math.round(avgRating))}${'☆'.repeat(5 - Math.round(avgRating))}</span> <span style="font-size:0.85rem;color:var(--color-text-light);">(${productReviews.length} reseñas)</span>` : '';
     
-    // Productos relacionados
     let relacionadosHTML = '';
     const relacionados = productos.filter(p => p.categoria === product.categoria && p.id !== product.id).slice(0, 4);
     if (relacionados.length > 0) {
@@ -599,7 +556,7 @@ function openProductModal(product, modoCarrito = false) {
                 <div class="related-grid">
                     ${relacionados.map(p => `
                         <div class="related-card" data-id="${p.id}">
-                            <img src="${p.imagenes[0] || 'img/placeholder.jpg'}" alt="${p.nombre}">
+                            <img src="${p.imagenes && p.imagenes[0] ? p.imagenes[0] : getPlaceholderImage(p.nombre)}" alt="${p.nombre}" onerror="this.src='${getPlaceholderImage(p.nombre)}'">
                             <div class="name">${p.nombre}</div>
                             <div class="price">${p.precio}</div>
                         </div>
@@ -615,7 +572,7 @@ function openProductModal(product, modoCarrito = false) {
     content.innerHTML = `
         <button class="close" id="modalClose">&times;</button>
         <div class="modal-image">
-            <img src="${imgSrc}" alt="${product.nombre}">
+            <img src="${imgSrc}" alt="${product.nombre}" onerror="this.src='${getPlaceholderImage(product.nombre)}'">
         </div>
         <div class="modal-title">${product.nombre}</div>
         <div class="modal-price">${product.precio}</div>
@@ -657,11 +614,9 @@ function openProductModal(product, modoCarrito = false) {
     
     overlay.classList.add('open');
     
-    // Renderizar reseñas
     renderReviewsInModal(product.id);
     renderReviewForm(product.id);
     
-    // Evento del botón
     if (modoCarrito) {
         const btn = document.getElementById('modalAddToCart');
         if (btn) {
@@ -695,7 +650,6 @@ function openProductModal(product, modoCarrito = false) {
         }
     }
     
-    // Eventos de productos relacionados
     content.querySelectorAll('.related-card').forEach(card => {
         card.addEventListener('click', function() {
             const id = parseInt(this.dataset.id);
@@ -828,7 +782,7 @@ function saveProductFromForm() {
                 precio,
                 categoria,
                 descripcion,
-                imagenes,
+                imagenes: imagenes.length ? imagenes : [getPlaceholderImage(nombre)],
                 tallas,
                 stockPorTalla,
                 colores,
@@ -846,7 +800,7 @@ function saveProductFromForm() {
             precio,
             categoria,
             descripcion,
-            imagenes,
+            imagenes: imagenes.length ? imagenes : [getPlaceholderImage(nombre)],
             tallas,
             stockPorTalla,
             colores,
@@ -900,6 +854,9 @@ function importProductsJSON(file) {
                         p.stockPorTalla = {};
                         p.tallas.forEach(t => p.stockPorTalla[t] = p.stock || 0);
                     }
+                    if (!p.imagenes || !p.imagenes.length) {
+                        p.imagenes = [getPlaceholderImage(p.nombre)];
+                    }
                 });
                 productos = imported;
                 saveProducts();
@@ -919,7 +876,7 @@ function importProductsJSON(file) {
 function resetToDefaultProducts() {
     if (!confirm('¿Restaurar productos por defecto? Se perderán los cambios actuales.')) return;
     if (typeof productosDefault !== 'undefined') {
-        productos = [...productosDefault];
+        productos = JSON.parse(JSON.stringify(productosDefault));
         saveProducts();
         renderAdminProductList();
         renderAllSections();
@@ -943,22 +900,14 @@ function showToast(msg) {
 document.addEventListener('DOMContentLoaded', async function() {
     console.log('📄 DOM listo');
     
-    // Cargar productos
     await loadProducts();
     console.log('📦 Productos disponibles:', productos.length);
     
-    // Inicializar OneSignal (si está disponible)
-    if (typeof OneSignalDeferred !== 'undefined') {
-        initOneSignal();
-    }
-    
-    // Ocultar loader
     setTimeout(() => {
         const loader = $('#loader');
         if (loader) loader.classList.add('hidden');
     }, 500);
     
-    // Menú hamburguesa (móvil)
     const navToggle = $('#navToggle');
     const nav = $('#nav');
     if (navToggle && nav) {
@@ -969,7 +918,6 @@ document.addEventListener('DOMContentLoaded', async function() {
         });
     }
     
-    // === NAVEGACIÓN ===
     $$('.nav-link').forEach(link => {
         link.addEventListener('click', function(e) {
             e.preventDefault();
@@ -981,7 +929,6 @@ document.addEventListener('DOMContentLoaded', async function() {
     if (!window.location.hash) window.location.hash = 'inicio';
     else handleHashChange();
     
-    // === FILTROS ===
     $$('.filter-select').forEach(select => {
         select.addEventListener('change', function() {
             const container = this.closest('.filters-container');
@@ -1018,14 +965,12 @@ document.addEventListener('DOMContentLoaded', async function() {
         });
     });
     
-    // === FAVORITOS ===
     $('#favoritesBtn').addEventListener('click', openFavoritesModal);
     $('#favModalClose').addEventListener('click', () => closeModal('favoritesModal'));
     $('#favoritesModal').addEventListener('click', function(e) {
         if (e.target === this) closeModal('favoritesModal');
     });
     
-    // === CARRITO ===
     $('#cartBtn').addEventListener('click', function() {
         renderCartModal();
         $('#cartModal').classList.add('open');
@@ -1037,7 +982,6 @@ document.addEventListener('DOMContentLoaded', async function() {
     $('#cartWhatsappBtn').addEventListener('click', sendCartByWhatsApp);
     $('#cartClearBtn').addEventListener('click', clearCart);
     
-    // === ACORDEÓN FAQ ===
     $$('.accordion-trigger').forEach(trigger => {
         trigger.addEventListener('click', function() {
             const item = this.parentElement;
@@ -1047,7 +991,6 @@ document.addEventListener('DOMContentLoaded', async function() {
         });
     });
     
-    // === NEWSLETTER ===
     const newsletterForm = document.getElementById('newsletterForm');
     if (newsletterForm) {
         newsletterForm.addEventListener('submit', function(e) {
@@ -1062,7 +1005,6 @@ document.addEventListener('DOMContentLoaded', async function() {
         });
     }
     
-    // === MODO OSCURO ===
     const themeToggle = $('#themeToggle');
     if (themeToggle) {
         themeToggle.addEventListener('click', function() {
@@ -1074,7 +1016,6 @@ document.addEventListener('DOMContentLoaded', async function() {
         document.body.setAttribute('data-theme', savedTheme);
     }
     
-    // === PANEL ADMIN ===
     $('#adminToggle').addEventListener('click', openAdminPanel);
     $('#adminClose').addEventListener('click', closeAdminPanel);
     $('#adminPanel').addEventListener('click', function(e) {
@@ -1094,7 +1035,6 @@ document.addEventListener('DOMContentLoaded', async function() {
     });
     $('#adminResetBtn').addEventListener('click', resetToDefaultProducts);
     
-    // === INICIALIZAR ===
     updateFavBadge();
     updateCartBadge();
     renderAllSections();
@@ -1102,7 +1042,6 @@ document.addEventListener('DOMContentLoaded', async function() {
     console.log('✅ App inicializada correctamente');
 });
 
-// Cerrar modales con Escape
 document.addEventListener('keydown', function(e) {
     if (e.key === 'Escape') {
         closeModal('productModal');
